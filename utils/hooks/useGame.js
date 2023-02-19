@@ -5,14 +5,13 @@ const initialState = {
   slot2: slotItems[0],
   slot3: slotItems[0],
   wallet: 0,
-  spinLimit: 5,
+  spinLimit: 50,
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case "SPIN":
       if (state.spinLimit === 0) {
-        alert("you do not have coins");
         return state;
       }
       const item1 = slotItems[Math.floor(Math.random() * slotItems.length)];
@@ -33,7 +32,7 @@ function reducer(state, action) {
     case "REFILL":
       return {
         ...state,
-        spinLimit: 5,
+        spinLimit: 50,
       };
     default:
       return state;
