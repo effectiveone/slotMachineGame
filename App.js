@@ -17,8 +17,11 @@ export default function App() {
   const [slot2, setSlot2] = useState(slotItems[0]);
   const [slot3, setSlot3] = useState(slotItems[0]);
   const [wallet, setWallet] = useState(0);
+  const [spinLimit, setSpinLimit] = useState(5);
 
   const spin = () => {
+    if (spinLimit === 0) return alert("you do not have coins");
+    setSpinLimit(spinLimit - 1);
     // Losuj trzy symbole
     const item1 = slotItems[Math.floor(Math.random() * slotItems.length)];
     const item2 = slotItems[Math.floor(Math.random() * slotItems.length)];
@@ -38,14 +41,14 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Slot Machine</Text>
+      <Text style={styles.wallet}>Wallet: {wallet}</Text>
       <View style={styles.slotsContainer}>
         <Text style={styles.slot}>{slot1.symbol}</Text>
         <Text style={styles.slot}>{slot2.symbol}</Text>
         <Text style={styles.slot}>{slot3.symbol}</Text>
       </View>
-      <Text style={styles.wallet}>Wallet: {wallet}</Text>
       <TouchableOpacity style={styles.button} onPress={spin}>
-        <Text style={styles.buttonText}>Spin</Text>
+        <Text style={styles.buttonText}>Spin {spinLimit}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -68,6 +71,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   slot: {
+    border: "1px solid black",
     fontSize: 60,
     marginHorizontal: 10,
   },
